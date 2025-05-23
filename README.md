@@ -54,14 +54,6 @@ If precise time sync is critical, consider alternatives such as **NTP**, **PTP (
 - `requestAnimationFrame` for high-frequency updates
 - OCR-B font (via [FontLibrary](https://fontlibrary.org/en/font/ocr-b))
 
----
-
-## 📦 How to Use / Deploy
-
-1. Clone or fork this repo.
-2. Push to GitHub.
-3. Go to **Settings > Pages** and set the source to the `main` branch.
-4. Visit `https://olayasturias.github.io/epoch-time-page`.
 
 ---
 

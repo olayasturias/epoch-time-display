@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Epoch Time</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- OCR-B font from FontLibrary -->
+  <meta charset="UTF-8" />
+  <title>OCR-Readable Epoch Time Display for Dataset Recording</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta -->
+  <meta name="description" content="OCR-friendly epoch time display for video synchronization and dataset recording. Designed for cameras and optical character recognition.">
+  <meta name="keywords" content="epoch time, OCR timestamp, visual sync tool, dataset recording, video timestamp, Unix time overlay, optical recognition clock, OCR epoch display">
+  <meta name="author" content="olayasturias">
+
+  <!-- Open Graph (social media cards) -->
+  <meta property="og:title" content="OCR-Readable Epoch Timestamp Display" />
+  <meta property="og:description" content="Real-time epoch time display optimized for video capture and dataset synchronization using OCR." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://olayasturias.github.io/epoch-time-page/" />
+
+  <!-- OCR-B font -->
   <link rel="stylesheet" href="https://fontlibrary.org//face/ocr-b" type="text/css"/>
 
   <style>
@@ -81,6 +92,11 @@
       #human { font-size: 3em; }
       #label { font-size: 1.5em; }
     }
+
+    /* SEO crawlable but hidden from users */
+    .seo-text {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -90,17 +106,24 @@
   </div>
 
   <div class="container">
-    <h1>Current Epoch Time</h1>
+    <h1>OCR-Friendly Epoch Timestamp Display</h1>
     <div id="epoch">Loading...</div>
     <div id="label">→ Human-readable <span id="timezone-label">UTC</span></div>
     <div id="human">Loading...</div>
+  </div>
+
+  <!-- Hidden SEO text for search engines -->
+  <div class="seo-text">
+    This webpage displays the current epoch time in a format optimized for screen capture and OCR (optical character recognition).
+    It is useful for synchronizing independent devices during dataset recording, logging timestamps in video recordings, and generating
+    machine-readable time overlays. Ideal for use in robotics, embedded systems, and vision-based datasets.
   </div>
 
   <script>
     let showLocalTime = false;
 
     function formatEpochWithMs(ms) {
-      return (ms / 1000).toFixed(3); // e.g. 1716473451.123
+      return (ms / 1000).toFixed(3);
     }
 
     function formatHumanTime(now) {
