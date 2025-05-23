@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Epoch Time</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- OCR-B font from FontLibrary -->
+  <link rel="stylesheet" href="https://fontlibrary.org//face/ocr-b" type="text/css"/>
+
+  <style>
+    :root {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --epoch-color: #ffff00;
+    }
+
+    body.dark {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --epoch-color: #ff0000;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'OCRBRegular', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 5vw;
+      margin: 0.5em 0;
+    }
+
+    #epoch {
+      font-size: 8vw;
+      font-weight: bold;
+      color: var(--epoch-color);
+    }
+
+    #human {
+      font-size: 6vw;
+      font-weight: bold;
+      margin-top: 0.5em;
+    }
+
+    #label {
+      font-size: 4vw;
+      margin-top: 1em;
+    }
+
+    .toggles {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    @media (min-width: 600px) {
+      h1 { font-size: 2.5em; }
+      #epoch { font-size: 5em; }
+      #human { font-size: 3em; }
+      #label { font-size: 1.5em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toggles">
+    <button onclick="toggleDarkMode()">🌙/☀️</button>
+    <button onclick="toggleTimeZone()">UTC / Local</button>
+  </div>
+
+  <div class="container">
+    <h1>Current Epoch Time</h1>
+    <div id="epoch">Loading...</div>
+    <div id="label">→ Human-readable <span id="timezone-label">UTC</span></div>
+    <div id="human">Loading...</div>
+  </div>
+
+  <script>
+    let showLocalTime = false;
+
+    function formatEpochWithMs(ms) {
+      return (ms / 1000).toFixed(3); // e.g. 1716473451.123
+    }
+
+    function formatHumanTime(now) {
+      if (showLocalTime) {
+        return now.toLocaleString();
+      } else {
+        return now.toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' UTC');
+      }
+    }
+
+    function update() {
+      const now = new Date();
+      const epoch = formatEpochWithMs(now.getTime());
+      const human = formatHumanTime(now);
+
+      document.getElementById('epoch').textContent = epoch;
+      document.getElementById('human').textContent = human;
+      document.getElementById('timezone-label').textContent = showLocalTime ? 'Local Time' : 'UTC';
+
+      requestAnimationFrame(update);
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function toggleTimeZone() {
+      showLocalTime = !showLocalTime;
+    }
+
+    requestAnimationFrame(update);
+  </script>
+</body>
+</html>
